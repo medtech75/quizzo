@@ -57,7 +57,7 @@ const Main = ({ startQuiz }) => {
 
     if (error) setError(null);
 
-    const API = `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=${questionsType}`;
+    const API = `https://raw.githubusercontent.com/medtech75/json/refs/heads/main/qq.json?token=GHSAT0AAAAAADEMAISBHDFSGMIU3BVWY33S2BPUQRA&amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=${questionsType}`;
 
     fetch(API)
       .then(respone => respone.json())
