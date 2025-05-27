@@ -59,55 +59,128 @@ const Main = ({ startQuiz }) => {
 
     const API = `https://raw.githubusercontent.com/medtech75/json/refs/heads/main/qq.json?token=GHSAT0AAAAAADEMAISBHDFSGMIU3BVWY33S2BPUQRA&amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=${questionsType}`;
 
-    fetch(API)
-      .then(respone => respone.json())
-      .then(data =>
-        setTimeout(() => {
-          const { response_code, results } = data;
-
-          if (response_code === 1) {
-            const message = (
-              <p>
-                The API doesn't have enough questions for your query. (Ex.
-                Asking for 50 Questions in a Category that only has 20.)
-                <br />
-                <br />
-                Please change the <strong>No. of Questions</strong>,{' '}
-                <strong>Difficulty Level</strong>, or{' '}
-                <strong>Type of Questions</strong>.
-              </p>
-            );
-
-            setProcessing(false);
-            setError({ message });
-
-            return;
+    let results = [
+          {
+              "type": "multiple",
+              "difficulty": "easy",
+              "category": "Science &amp; Nature",
+              "question": "Stars consist mainly of hydrogen and which other gas?",
+              "correct_answer": "Helium",
+              "incorrect_answers": [
+                  "Oxygen",
+                  "Argon",
+                  "Nitrogen"
+              ]
+          },
+          {
+              "type": "multiple",
+              "difficulty": "easy",
+              "category": "Entertainment: Video Games",
+              "question": "Which of these video game engines was made by the company Epic Games?",
+              "correct_answer": "Unreal",
+              "incorrect_answers": [
+                  "Unity",
+                  "Game Maker: Studio",
+                  "Cry Engine"
+              ]
+          },
+          {
+              "type": "multiple",
+              "difficulty": "easy",
+              "category": "Entertainment: Music",
+              "question": "Who is the lead singer of Foo Fighters?",
+              "correct_answer": "Dave Grohl",
+              "incorrect_answers": [
+                  "Dave Mustaine",
+                  "James Hetfield",
+                  "Little Red Riding Hood"
+              ]
+          },
+          {
+              "type": "multiple",
+              "difficulty": "easy",
+              "category": "Entertainment: Music",
+              "question": "Which song on Daft Punk&#039;s &quot;Random Access Memories&quot; features Pharrell Williams?",
+              "correct_answer": "Get Lucky",
+              "incorrect_answers": [
+                  "Doin&#039; It Right",
+                  "Instant Crush",
+                  "The Game of Love"
+              ]
+          },
+          {
+              "type": "multiple",
+              "difficulty": "easy",
+              "category": "Entertainment: Video Games",
+              "question": "Which of the following was NOT a playable character in the game Kingdom Hearts: Birth by Sleep?",
+              "correct_answer": "Ignis",
+              "incorrect_answers": [
+                  "Ventus",
+                  "Terra",
+                  "Aqua"
+              ]
           }
+      ];
+    results.forEach(element => {
+      element.options = shuffle([
+        element.correct_answer,
+        ...element.incorrect_answers,
+      ]);
+    });
+    setProcessing(false);
+    startQuiz(
+      results,
+      countdownTime.hours + countdownTime.minutes + countdownTime.seconds
+    );
+    // fetch(API)
+    //   .then(respone => respone.json())
+    //   .then(data =>
+    //     setTimeout(() => {
+    //       const { response_code, results } = data;
 
-          results.forEach(element => {
-            element.options = shuffle([
-              element.correct_answer,
-              ...element.incorrect_answers,
-            ]);
-          });
+    //       if (response_code === 1) {
+    //         const message = (
+    //           <p>
+    //             The API doesn't have enough questions for your query. (Ex.
+    //             Asking for 50 Questions in a Category that only has 20.)
+    //             <br />
+    //             <br />
+    //             Please change the <strong>No. of Questions</strong>,{' '}
+    //             <strong>Difficulty Level</strong>, or{' '}
+    //             <strong>Type of Questions</strong>.
+    //           </p>
+    //         );
 
-          setProcessing(false);
-          startQuiz(
-            results,
-            countdownTime.hours + countdownTime.minutes + countdownTime.seconds
-          );
-        }, 1000)
-      )
-      .catch(error =>
-        setTimeout(() => {
-          if (!navigator.onLine) {
-            setOffline(true);
-          } else {
-            setProcessing(false);
-            setError(error);
-          }
-        }, 1000)
-      );
+    //         setProcessing(false);
+    //         setError({ message });
+
+    //         return;
+    //       }
+
+          // results.forEach(element => {
+          //   element.options = shuffle([
+          //     element.correct_answer,
+          //     ...element.incorrect_answers,
+          //   ]);
+          // });
+
+    //       setProcessing(false);
+    //       startQuiz(
+    //         results,
+    //         countdownTime.hours + countdownTime.minutes + countdownTime.seconds
+    //       );
+    //     }, 1000)
+    //   )
+    //   .catch(error =>
+    //     setTimeout(() => {
+    //       if (!navigator.onLine) {
+    //         setOffline(true);
+    //       } else {
+    //         setProcessing(false);
+    //         setError(error);
+    //       }
+    //     }, 1000)
+    //   );
   };
 
   if (offline) return <Offline />;
