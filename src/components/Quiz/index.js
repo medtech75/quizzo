@@ -80,7 +80,7 @@ const Quiz = ({ data, countdownTime, endQuiz }) => {
                   <Header as="h1" block floated="left">
                     <Icon name="info circle" />
                     <Header.Content>
-                      {`Question No.${questionIndex + 1} of ${data.length}`}
+                      {`Pytanie nr ${questionIndex + 1} z ${data.length}`}
                     </Header.Content>
                   </Header>
                   <Countdown
@@ -92,11 +92,11 @@ const Quiz = ({ data, countdownTime, endQuiz }) => {
                 <br />
                 <Item.Meta>
                   <Message size="huge" floating>
-                    <b>{`Q. ${he.decode(data[questionIndex].question)}`}</b>
+                    <b>{`P. ${he.decode(data[questionIndex].question)}`}</b>
                   </Message>
                   <br />
                   <Item.Description>
-                    <h3>Please choose one of the following answers:</h3>
+                    <h3>Wybierz jedną z poniższych odpowiedzi:</h3>
                   </Item.Description>
                   <Divider />
                   <Menu vertical fluid size="massive">
@@ -122,7 +122,7 @@ const Quiz = ({ data, countdownTime, endQuiz }) => {
                 <Item.Extra>
                   <Button
                     primary
-                    content="Next"
+                    content="Dalej"
                     onClick={handleNext}
                     floated="right"
                     size="big"

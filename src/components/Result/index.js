@@ -13,7 +13,7 @@ const Result = ({
   replayQuiz,
   resetQuiz,
 }) => {
-  const [activeTab, setActiveTab] = useState('Stats');
+  const [activeTab, setActiveTab] = useState('Statystyki');
 
   const handleTabClick = (e, { name }) => {
     setActiveTab(name);
@@ -23,17 +23,17 @@ const Result = ({
     <Container>
       <Menu fluid widths={2}>
         <Menu.Item
-          name="Stats"
-          active={activeTab === 'Stats'}
+          name="Statystyki"
+          active={activeTab === 'Statystyki'}
           onClick={handleTabClick}
         />
         <Menu.Item
-          name="QNA"
-          active={activeTab === 'QNA'}
+          name="Odpowiedzi"
+          active={activeTab === 'Odpowiedzi'}
           onClick={handleTabClick}
         />
       </Menu>
-      {activeTab === 'Stats' && (
+      {activeTab === 'Statystyki' && (
         <Stats
           totalQuestions={totalQuestions}
           correctAnswers={correctAnswers}
@@ -42,7 +42,7 @@ const Result = ({
           resetQuiz={resetQuiz}
         />
       )}
-      {activeTab === 'QNA' && <QNA questionsAndAnswers={questionsAndAnswers} />}
+      {activeTab === 'Odpowiedzi' && <QNA questionsAndAnswers={questionsAndAnswers} />}
       <br />
     </Container>
   );
